@@ -180,4 +180,8 @@ class Maze:
             self.__animate()
             if self.__solve_r(i, j + 1):
                 return True
+            self.__cells[i][j].draw_move(self.__cells[i][j + 1], undo=True)
+            self.__animate()
+
+        return False
             

@@ -116,7 +116,7 @@ UNDO_COLOUR = "grey"        # Color for backtracking moves
 
 ---
 
-## Known Issues
+## 🐛 Known Issues
 High numbers of rows and columns results in RecursionError: maximum recursion depth exceeded.
 
 ## 🤝 Contributing
