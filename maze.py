@@ -28,6 +28,8 @@ class Maze:
         self.__solve = solve
         self.__seed = seed
         self.__win = win
+        self.solve_visited_cells = 0
+        self.path_length = 0
 
         if self.__seed is not None:
             random.seed(self.__seed)
@@ -128,9 +130,11 @@ class Maze:
 
     def __solve_r(self, i, j):
         self.__cells[i][j].visited = True
+        self.solve_visited_cells += 1
 
         # if we have reached the exit
         if i == self.__num_cols - 1 and j == self.__num_rows - 1:
+            self.path_length += 1
             return True
 
         # try to move in each direction
@@ -143,6 +147,7 @@ class Maze:
             self.__cells[i][j].draw_move(self.__cells[i - 1][j])
             self.__animate()
             if self.__solve_r(i - 1, j):
+                self.path_length += 1
                 return True
             self.__cells[i][j].draw_move(self.__cells[i - 1][j], undo=True)
             self.__animate()
@@ -155,6 +160,7 @@ class Maze:
             self.__cells[i][j].draw_move(self.__cells[i + 1][j])
             self.__animate()
             if self.__solve_r(i + 1, j):
+                self.path_length += 1
                 return True
             self.__cells[i][j].draw_move(self.__cells[i + 1][j], undo=True)
             self.__animate()
@@ -167,6 +173,7 @@ class Maze:
             self.__cells[i][j].draw_move(self.__cells[i][j - 1])
             self.__animate()
             if self.__solve_r(i, j - 1):
+                self.path_length += 1
                 return True
             self.__cells[i][j].draw_move(self.__cells[i][j - 1], undo=True)
             self.__animate()
@@ -179,6 +186,7 @@ class Maze:
             self.__cells[i][j].draw_move(self.__cells[i][j + 1])
             self.__animate()
             if self.__solve_r(i, j + 1):
+                self.path_length += 1
                 return True
             self.__cells[i][j].draw_move(self.__cells[i][j + 1], undo=True)
             self.__animate()

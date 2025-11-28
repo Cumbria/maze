@@ -8,3 +8,4 @@ BACKGROUND_COLOUR = "white"
 MAZE_COLOUR = "black"
 PATH_COLOUR = "red"
 UNDO_COLOUR = "grey"
+

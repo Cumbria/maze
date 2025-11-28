@@ -47,7 +47,7 @@ def main():
                 sys.exit(1)
 
     if '-q' in lArgs:
-        ANIMATION_SPEED = 0.0
+        ANIMATION_SPEED = 0
     else:
         ANIMATION_SPEED = 0.05
 
@@ -73,7 +73,15 @@ def main():
     else: 
         print("Using random seed")
 
+    print(f"Auto Solve: {'Enabled' if AUTO_SOLVE else 'Disabled'}") 
+
+    print(f"Generating maze of size {COLUMNS} x {ROWS}")
+    
     maze = Maze(MARGIN, MARGIN, ROWS, COLUMNS, COLUMN_WIDTH, ROW_HEIGHT, ANIMATION_SPEED, AUTO_SOLVE, SEED, win )
+
+    print(f"Cells visited during solve: {maze.solve_visited_cells} of {ROWS * COLUMNS} total cells")
+    print (f"Final solution path length: {maze.path_length}")
+    print("Close the window to exit.")
 
     win.wait_for_close()
 
