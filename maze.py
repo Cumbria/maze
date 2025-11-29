@@ -2,6 +2,7 @@ from config import *
 from cell import Cell
 import random
 import time
+import sys
 
 class Maze:
     def __init__(
@@ -54,18 +55,26 @@ class Maze:
     def __draw_cell(self, i, j):
         if self.__win is None:
             return
-        x1 = self.__x1 + i * self.__cell_size_x
-        y1 = self.__y1 + j * self.__cell_size_y
-        x2 = x1 + self.__cell_size_x
-        y2 = y1 + self.__cell_size_y
-        self.__cells[i][j].draw(x1, y1, x2, y2)
-        self.__animate()
+        try:
+            x1 = self.__x1 + i * self.__cell_size_x
+            y1 = self.__y1 + j * self.__cell_size_y
+            x2 = x1 + self.__cell_size_x
+            y2 = y1 + self.__cell_size_y
+            self.__cells[i][j].draw(x1, y1, x2, y2)
+            self.__animate()
+        except KeyboardInterrupt:
+            print("\nMaze Construction interrupted.")
+            sys.exit(0)
 
     def __animate(self):
         if self.__win is None:
             return
-        self.__win.redraw()
-        time.sleep(self.__animation_speed)
+        try:
+            self.__win.redraw()
+            time.sleep(self.__animation_speed)
+        except KeyboardInterrupt:
+            print("\nMaze Animation interrupted.")
+            sys.exit(0)
 
     def __break_entrance_and_exit(self):
         self.__cells[0][0].has_top_wall = False
